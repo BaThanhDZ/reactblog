@@ -1,0 +1,14 @@
+                CRA                     vite
+component       js, jsx                 js (chỉ chứa js thuần), jsx (viết jsx, js)
+                index.js                main.jsx
+                public/index.html       index.html
+
+
+
+Homepage
+ArticleLatest
+https://wp-api.codethanhthuongthua.asia/wp-json/wp/v2/posts?per_page=3&page=1&lang=vi
+ArticlePopular
+https://wp-api.codethanhthuongthua.asia/wp-json/wp/v2/posts?per_page=3&page=1&lang=vi&orderby=post_views
+ArticleGeneral
+https://wp-api.codethanhthuongthua.asia/wp-json/wp/v2/posts?per_page=2&page=1&lang=vi
