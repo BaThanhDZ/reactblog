@@ -143,14 +143,14 @@ function HeaderMenus() {
         </ul>
         <ul className="header-nav__lists">
           <li className="user">
-            <a href="/login"><i className="icons ion-person" /> {nickname}</a>
+            {/* <a href="/login"><i className="icons ion-person" /> {nickname}</a> */}
             {/* đoạn code này gọi dc funtion onClickLogOut */}
-            {/* <ul id="menuInforLogin">
+            <ul id="menuInforLogin">
               <li><a href="/login">Đăng nhập</a></li>
               <li><a href="/register">Đăng ký</a></li>
               <li><a href="#" onClick={onClickLogOut}>Đăng xuất</a></li>
               <li><a href="/changepw">Đổi mật khẩu</a></li>
-            </ul> */}
+            </ul>
             {/* đoạn code này truyền qua duyệt obj bên trên gọi chưa dc funtion onClickLogOut */}
             <a href="/login"><i className="icons ion-person" /> {nickname}</a>
             <ul>{infoPerson(menuInfo)}</ul>
