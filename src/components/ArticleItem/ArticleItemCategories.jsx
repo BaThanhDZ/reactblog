@@ -11,6 +11,7 @@ export default function ArticleItemCategories(props) {
   categories.forEach((categoryId) => {
     const categoryItem = categoryList.find((item) => item.id === categoryId);
     result.push(categoryItem);
+    
   });
 
   const xhtml = result.map((item, index) => (

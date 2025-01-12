@@ -24,15 +24,15 @@ export default function ArticleItem({
   if (!data) return <></>;
 
   const title = data.title.rendered;
-  const date = data.date;
+  const date = dayjs(data.date).fromNow();
   const name = data.author_data.nickname;
   const avatar = data.author_data.avatar;
   const image = data.featured_media_url;
-  const link = data.link;
   const view = data.view_count;
   const desc = data.excerpt.rendered;
   const categories = data.categories;
   const slug = data.slug;
+
   
 
   // eslint-disable-next-line no-unused-vars

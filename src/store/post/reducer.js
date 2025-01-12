@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { actGetSlug, actPostGeneral, actPostNew, actPostPoPular, actPostRelated } from "./actions";
+import { actGetIDPost, actGetSlug, actPostGeneral, actPostNew, actPostPoPular, actPostRelated } from "./actions";
 
 const initialState = {
     postsNew: [],
@@ -7,7 +7,8 @@ const initialState = {
     postsGeneral: [],
     // postDetail: null,
     slugPost: [],
-    postRelated: []
+    postRelated: [],
+    idPost: null
     
 };
 
@@ -25,8 +26,10 @@ const reducer = createReducer(initialState, (builer) => {
         state.slugPost = action.payload[0];
     })
     builer.addCase(actPostRelated, (state, action) => {
-        state.postRelated = action.payload;
-        
+        state.postRelated = action.payload;  
+    })
+    builer.addCase(actGetIDPost, (state, action) => {
+        state.idPost = action.payload[0];
     })
 });
 

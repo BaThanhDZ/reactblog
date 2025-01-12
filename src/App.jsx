@@ -1,16 +1,18 @@
-import { createBrowserRouter, Route, RouterProvider, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import RegisterPage from "./pages/RegisterPage";
 import SearchPage from "./pages/SearchPage";
-import LoginPage from "./pages/LoginPage";
-import { useEffect } from "react";
 import { actGetCategory } from "./store/category/actions";
-import { useDispatch } from "react-redux";
+import ChangePwPage from "./pages/ChangePasswordPage";
 
 function App() {
+  dayjs.extend(window.dayjs_plugin_relativeTime);
   const routes = [
     {
       path: "",
@@ -25,6 +27,10 @@ function App() {
       element: () => <RegisterPage />,
     },
     {
+      path: "changepw",
+      element: () => <ChangePwPage />,
+    },
+    {
       path: "search",
       element: () => <SearchPage />,
     },
@@ -33,7 +39,7 @@ function App() {
       element: () => <PostDetailPage />,
     },
   ];
-  
+
   // const routes = createBrowserRouter (
   //   [
   //     {
@@ -56,7 +62,7 @@ function App() {
   //       path: "post/:slug",
   //       element: () => <PostDetailPage />,
   //     },
-  //   ], 
+  //   ],
   //   {
   //     future: {
   //       v7_fetcherPersist: true,
@@ -73,14 +79,13 @@ function App() {
 
   useEffect(() => {
     fetch(
-          "https://wp-api.codethanhthuongthua.asia/wp-json/wp/v2/categories?per_page=100&page=1&lang=vi"
-        )
-          .then((res) => res.json())
-          .then((result) => {
-            dispatch(actGetCategory(result))
-          });
-  }, [])
-
+      "https://wp-api.codethanhthuongthua.asia/wp-json/wp/v2/categories?per_page=100&page=1&lang=vi"
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        dispatch(actGetCategory(result));
+      });
+  }, []);
 
   function showRoute(routes) {
     let xhtml = null;

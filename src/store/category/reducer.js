@@ -7,7 +7,8 @@ const initialState = {
 
 const reducer = createReducer(initialState, (builer) => {
     builer.addCase(actGetCategory, (state, action) => {
-        state.list = action.payload
+        state.list = action.payload;
+        
     })
 });
 

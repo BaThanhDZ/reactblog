@@ -8,6 +8,7 @@ const initialState = {
 const reducer = createReducer(initialState, (builder) => {
     builder.addCase(actGetTag, (state, action) => {
         state.tagList = action.payload;
+        
     })
 })
 
