@@ -11,7 +11,7 @@ function PostDetailRelatedPosts() {
         key={index}
         title={item.title.rendered}
         author={item.author_data.nickname}
-        date={dayjs(item.date).fromNow()}
+        date={item.date}
         link={item.link}
       />
     );

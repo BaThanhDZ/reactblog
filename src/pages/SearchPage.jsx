@@ -1,29 +1,34 @@
-import Button from "../components/shared/Button";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import ArticleItem from "../components/ArticleItem";
+import Button from "../components/shared/Button";
 import MainTitle from "../components/shared/MainTitle";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { fetchSearch } from "../store/searchSlice";
+import { alertSuccess } from '../helpers/toastify'
 
 function SearchPage() {
-  const [itemSearch, setItemSearch] = useState([]);
-  let valueSearch = useSelector((state) => state.SEARCH.valueSearch);
-  console.log(valueSearch);
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const valueSearch  = searchParams.get('keyword');
+  const itemSearch = useSelector((state) => state.SEARCH.valueSearch);
   
+  if (valueSearch === "") {
+    alertSuccess("Mời nhập từ khóa tìm kiếm");
+    return <></>
+  }
   
   useEffect(() => {
-    fetch(
-      `https://wp-api.codethanhthuongthua.asia/wp-json/wp/v2/posts?per_page=100&page=1&search=${valueSearch}&lang=vi`
-    ) .then((res) => res.json()).then((result) => {
-        console.log(result);
-        setItemSearch(result)
-      });
+    dispatch(fetchSearch(valueSearch))
   }, [valueSearch])
   
-
+  
+  
   const xhtml = itemSearch.map((item, index) => {
       return (
         <div key={index} className="tcl-col-12 tcl-col-md-8">
           <ArticleItem 
+            valueSearch={valueSearch}
             data={item}
             isStyleCard 
             isShowCategoies 

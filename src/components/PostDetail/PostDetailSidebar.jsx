@@ -4,7 +4,7 @@ import PostDetailRelatedPosts from "./PostDetailRelatedPosts"
 
 function PostDetailSidebar() {
   const slugPost = useSelector((state) => state.POST.slugPost)
-  if(slugPost.length === 0 ) return <></>;
+  if(!slugPost ) return <></>;
   
   const author = slugPost.author_data.nickname;
   const avatar = slugPost.author_data.avatar;

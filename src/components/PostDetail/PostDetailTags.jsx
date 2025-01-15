@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function PostDetailTags(props) {
   const { tags } = props;
-  const tagList = useSelector((state) => state.TAG.tagList);
+  const tagList = useSelector((state) => state.TAG.tagsList);
+  
 
   if (tagList.length === 0) return <></>;
   let arrayTag = [];
@@ -16,12 +18,11 @@ function PostDetailTags(props) {
   //   const tagItem = tagList.find((item) => item.id === tagId);
   //   arrayTag.push(tagItem);
   // });
-
   const xhtml = arrayTag.map((item, index) => (
     <li key={index} className="item">
-      <a href="/" className="btn btn-default">
+      <Link to="/" className="btn btn-default">
         {item.name}
-      </a>
+      </Link>
     </li>
   ));
 

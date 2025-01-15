@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function ArticleItemCategories(props) {
-  const categoryList = useSelector((state) => state.CATEGORY.list);
+  const categoryList = useSelector((state) => state.CATEGORY.categoryList);
   const { categories } = props;
   
   if (categoryList.length === 0) return <></>;
-
   const result = [];
   // duyet id
   categories.forEach((categoryId) => {
@@ -14,25 +14,15 @@ export default function ArticleItemCategories(props) {
     
   });
 
+  // /category/fe
+  // /category/vuejs
   const xhtml = result.map((item, index) => (
     <li key={index}>
-      <a href="/" className="btn btn-category">
+      <Link to="/" className="btn btn-category">
         {item.name}
-      </a>
+      </Link>
     </li>
   ));
-
-  // const xhtml = result.map((item, index) => {
-  //   // todo 1
-  //   // todo 2
-  //   return (
-  //     <li key={index}>
-  //       <a href="/" className="btn btn-category">
-  //         {item.name}
-  //       </a>
-  //     </li>
-  //   );
-  // });
 
   return <ul className="article-item__categories">{xhtml}</ul>;
 }

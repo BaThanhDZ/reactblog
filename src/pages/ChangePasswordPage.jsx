@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Button from '../components/shared/Button'
 import Input from '../components/shared/Input'
 import { API, token } from '../config'
+import { alertSuccess } from '../helpers/toastify'
 import './LoginPage/login.css'
 
 function ChangePWPage() {
@@ -17,9 +18,9 @@ function ChangePWPage() {
   }, [token]);
 
   const[password, setPassword] = useState({
-    password_old: "",
-    password_new: "",
-    password_confirm: ""
+    password: "",
+    new_password: "",
+    confirm_new_password: ""
   })
 
 
@@ -39,8 +40,9 @@ function ChangePWPage() {
     event.preventDefault()
     setPassword({
       ...password, 
-      username: "",
       password: "",
+      new_password: "",
+      confirm_new_password: ""
     });
     
     const elAlertErr = document.getElementById("alertErr");
@@ -48,8 +50,7 @@ function ChangePWPage() {
     API.put("/wp/v2/users/password", password, {
         headers: { 'Authorization': `Bearer ${token}`}
     }).then((res) => {
-      console.log(res.data);
-      
+      alertSuccess("Thay đổi mật khẩu thành công!")
     })
     .catch((err) => {
         const alertErr = `<div className="alert alert-danger" role="alert">Thông tin chưa chính xác!</div>`
@@ -92,27 +93,27 @@ function ChangePWPage() {
                   label="Mật khẩu cũ" 
                   placeholder="Nhập mật khẩu cũ ..."
                   autoComplete="off"
-                  name="password_old"
+                  name="password"
                   onChange={handleChange}
-                  value={password.password_old}
+                  value={password.password}
                 />
                 <Input 
                   type="text" 
                   label="Mật khẩu mới" 
                   placeholder="Nhập mật khẩu mới ..."
                   autoComplete="off"
-                  name="password_new"
+                  name="new_password"
                   onChange={handleChange}
-                  value={password.password_new}
+                  value={password.new_password}
                 />
                 <Input 
                   type="text" 
                   label="Xác nhận mật khẩu mới" 
                   placeholder="Nhập lại mật khẩu mới ..."
                   autoComplete="off"
-                  name="password_confirm"
+                  name="confirm_new_password"
                   onChange={handleChange}
-                  value={password.password_confirm}
+                  value={password.confirm_new_password}
                 />
 
                 <div className="d-flex tcl-jc-between tcl-ais-center">

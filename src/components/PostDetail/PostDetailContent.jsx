@@ -3,17 +3,18 @@ import "./post-detail.css";
 import PostDetailComments from "./PostDetailComments";
 import PostDetailRichText from "./PostDetailRichText";
 import PostDetailTags from "./PostDetailTags";
+import { formattedDate } from "../../helpers/myDayjs";
 
 function PostDetailContent() {
   const slugPost = useSelector((state) => state.POST.slugPost);
-  if (slugPost.length === 0) return <></>;
+  if (!slugPost) return <></>;
 
   const image = slugPost.featured_media_url;
   const content = slugPost.content.rendered;
   const tags = slugPost.tags;
   const avatar = slugPost.author_data.avatar;
   const excerpt = slugPost.excerpt.rendered;
-  const modifiedTime = dayjs(slugPost.modified).fromNow();
+  const modifiedTime = formattedDate(slugPost.modified);
   const commentCount = slugPost.comment_count;
   const commentName = slugPost.author_data.nickname;
 

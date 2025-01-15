@@ -1,21 +1,31 @@
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../shared/Input';
-import { actSearchValue } from '../../store/search/actions';
 
 function HeaderSearch() {
-  const dispatch = useDispatch();
-
+  const [valueSearch, setValueSearch] = useState("")
+  let navigate = useNavigate();
+  
   function handleChange(event) {
-    dispatch(actSearchValue(event.target.value.trim()))
+    setValueSearch(event.target.value)
   }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    navigate(`/search?keyword=${valueSearch}`);
+    setValueSearch("")
+  }
+  
   return (
     <div className="tcl-col-3">
       {/* Header Search */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input 
           type="search" 
           placeholder="Nhap gia tri search ..." 
           onChange={handleChange}
+          name="keyword"
+          value={valueSearch}
         />
       </form>
     </div>

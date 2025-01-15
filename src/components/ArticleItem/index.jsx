@@ -14,7 +14,7 @@ export default function ArticleItem({
   isShowCategoies = false,
   isShowAvatar = true,
   // title, name, date, image, avatar, link, desc, view, status,
-  data,
+  data, valueSearch
 }) {
   const classes = cls("article-item", {
     "style-card": isStyleCard,
@@ -22,9 +22,7 @@ export default function ArticleItem({
   });
 
   if (!data) return <></>;
-
-  const title = data.title.rendered;
-  const date = dayjs(data.date).fromNow();
+  
   const name = data.author_data.nickname;
   const avatar = data.author_data.avatar;
   const image = data.featured_media_url;
@@ -32,10 +30,19 @@ export default function ArticleItem({
   const desc = data.excerpt.rendered;
   const categories = data.categories;
   const slug = data.slug;
+  const date =data.date;
 
+  // xử lý trường hợp highligh từ khóa khi search
+  const regex = new RegExp(valueSearch, 'gi');
+  let title = data.title.rendered
+  if(valueSearch) {
+    title = title.replace(regex, (match) => `<mark>${match}</mark>`);
+    title = title.replace('<mark>', '');
+    title = title.replace('</mark>', '');
+  }
   
+  // <div dangerouslySetInnerHTML={{ __html: props.content }} />
 
-  // eslint-disable-next-line no-unused-vars
 
   return (
     <article className={classes}>

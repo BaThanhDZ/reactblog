@@ -1,6 +1,26 @@
+import { useEffect } from 'react';
+import { findDOMNode } from 'react-dom';
 import './comments.css'
+import { token } from '../../config';
 
 function PostDetailComments({commentCount, avatar, excerpt, modifiedTime, commentName}) {
+  let commentForm = null;
+
+  useEffect(() => {
+    const headers = { 'Authorization': `Bearer ${token}` };
+    
+    fetch("https://wp-api.codethanhthuongthua.asia/wp-json/wp/v2/users/me", {headers})
+    .then((res) => res.json()).then((data) => {
+      if (data.nickname !== undefined) {
+        // console.log(123);
+        
+      } 
+      else {
+        commentForm = `<h4>Vui lòng <a href="/login">đăng nhập</a> để bình luận</h4>`;
+      }
+    })
+  }, [token]);
+
   let newExcerpt = excerpt.replace("<p>", "");
   newExcerpt = newExcerpt.replace("</p>", "");
 
@@ -28,6 +48,7 @@ function PostDetailComments({commentCount, avatar, excerpt, modifiedTime, commen
 
   return (
     <div className="post-detail__comments">
+      <div className="commentForm"></div>
       <div className="comments__form">
         <div className="comments__form--control">
           <div className="comments__section--avatar">

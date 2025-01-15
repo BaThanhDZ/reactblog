@@ -2,8 +2,9 @@ import './LoginPage/login.css'
 import { Link } from "react-router-dom"
 import Input from '../components/shared/Input'
 import Button from '../components/shared/Button'
-import { API, token } from '../config'
+import { API, TOKEN, token } from '../config'
 import { useEffect, useState } from 'react'
+import { alertSuccess } from '../helpers/toastify'
 
 function RegisterPage() {
   // chống vào lại trang đăng nhập, đăng ký khi đã đăng nhập rồi
@@ -51,11 +52,14 @@ function RegisterPage() {
     API.post("/wp/v2/users/register", infoLogin)
     .then((resRegister) => {
       const dataLogin = {username: infoLogin.username, password: infoLogin.password};
-      // chưa đăng nhập luôn được
+      alertSuccess("Đăng ký tài khoản thành công!")
+      
       API.post("jwt-auth/v1/token", dataLogin)
-      .then((res) => {
-        window.location.href = "/"
-      })
+        .then((res) => {
+          const token = res.data.token;
+          localStorage.setItem(TOKEN, token)
+          window.location.href = "/"
+        })
     })
     .catch((err) => {
       const alertErr = `<div className="alert alert-danger" role="alert">Thông tin đăng ký không hợp lệ!</div>`

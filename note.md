@@ -1,0 +1,5 @@
+- chuyển toàn bộ sang Slice
+- sử dụng Link thay cho thẻ a
+- Fix Search, highlight từ khóa
+- Thêm CategoryPage
+- Menu đa cấp

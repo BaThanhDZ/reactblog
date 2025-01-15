@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit"
-import postReducer from "./post/reducer"
-import categoryReducer from "./category/reducer"
-import tagReducer from "./tag/reducer"
-import searchReducer from "./search/reducer"
+import postReducer from "./postSlice"
+import categoryReducer from "./categorySlice"
+import tagReducer from "./tagsSlice"
+import searchReducer from "./searchSlice"
+import menuReducer from "./menuSlice"
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         CATEGORY: categoryReducer,
         TAG: tagReducer,
         SEARCH: searchReducer,
+        MENU: menuReducer,
     },
 })
 

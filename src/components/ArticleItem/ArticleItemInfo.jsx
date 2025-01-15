@@ -1,6 +1,8 @@
-import ArticleItemAvatar from './ArticleItemAvatar';
+import { formattedDate } from "../../helpers/myDayjs";
+import ArticleItemAvatar from "./ArticleItemAvatar";
 
 export default function ArticleItemInfo({ isShowAvatar, name, date, avatar }) {
+  const dateFormatted = formattedDate(date);
   return (
     <div className="article-item__info">
       {isShowAvatar && <ArticleItemAvatar avatar={avatar} />}
@@ -11,7 +13,7 @@ export default function ArticleItemInfo({ isShowAvatar, name, date, avatar }) {
           </a>
         </div>
         <div className="article-item__datetime">
-          <div className="date">{date}</div>
+          <div className="date">{dateFormatted}</div>
           {/* <div className="time">
             <svg
               stroke="currentColor"

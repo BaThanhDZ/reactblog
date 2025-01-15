@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
+import { formattedDate } from "../../helpers/myDayjs";
 
 function PostDetailHead() {
   const slugPost = useSelector((state) => state.POST.slugPost);
-  if (slugPost.length === 0) return <></>;
+  if (!slugPost) return <></>;
 
   const title = slugPost.title.rendered;
   const author = slugPost.author_data.nickname;
-  const date = dayjs(slugPost.date).fromNow();
+  const date = formattedDate(slugPost.date);
   const viewCount = slugPost.view_count;
   const commentCount = slugPost.comment_count;
 

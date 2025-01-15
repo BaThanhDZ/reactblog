@@ -1,16 +1,19 @@
 import { useSelector } from 'react-redux';
 import './footer.css';
+import { Link } from 'react-router-dom';
 
 function Footer() {
-  const listCategory = useSelector((state) => state.CATEGORY.list);
-  
+  const listCategory = useSelector((state) => state.CATEGORY.categoryList);
   
   let xhtml = listCategory.map((item, index) => {
-    return (
-      <li key={index}>
-        <a href="/">{item.name}</a>
-      </li>
-    )
+    if(index < 5) {
+      return (
+        <li key={index}>
+          <Link to="/">{item.name}</Link>
+        </li>
+      )
+    }
+    
   })
   
   return (
@@ -26,23 +29,12 @@ function Footer() {
               <p>© 2020, All Rights Reserved.</p>
             </div>
             {/* Footer Column */}
-            <div className="tcl-col-12 tcl-col-sm-6 tcl-col-md-4 tcl-col-lg-2">
+            <div className="tcl-col-12 tcl-col-sm-6 tcl-col-md-4 tcl-col-lg-3">
               <div className="footer-title">
                 <p>Categories</p>
               </div>
               <ul className="footer-content__list">
-                <li>
-                  <a href="/">ReactJs</a>
-                </li>
-                <li>
-                  <a href="/">Javascript</a>
-                </li>
-                <li>
-                  <a href="/">Angular</a>
-                </li>
-                <li>
-                  <a href="/">HTML, HTML5</a>
-                </li>
+                {xhtml}
               </ul>
             </div>
             {/* Footer Column */}
@@ -56,7 +48,7 @@ function Footer() {
               </ul>
             </div>
             {/* Footer Column */}
-            <div className="tcl-col-12 tcl-col-sm-6 tcl-col-md-4 tcl-col-lg-4">
+            <div className="tcl-col-12 tcl-col-sm-6 tcl-col-md-4 tcl-col-lg-3">
               <div className="footer-title">
                 <p>Fanpage</p>
               </div>
@@ -73,7 +65,7 @@ function Footer() {
                   data-show-facepile="true"
                 >
                   <blockquote cite="/" className="fb-xfbml-parse-ignore">
-                    <a href="/">Học Lập Trình Web Thông Qua Projects Thực Tế</a>
+                    <Link to="/">Học Lập Trình Web Thông Qua Projects Thực Tế</Link>
                   </blockquote>
                 </div>
               </div>

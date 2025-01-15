@@ -1,15 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLatestPosts } from "../../store/postSlice";
 import ArticleItem from "../ArticleItem";
 import MainTitle from "../shared/MainTitle";
 import "./latest-news-list.css";
-import { useDispatch, useSelector } from "react-redux";
-import { actPostNew } from "../../store/post/actions";
 
 function ArticleLatest() {
-  const dispatch = useDispatch()
-  const postsNew = useSelector((state) => state.POST.postsNew)
+  const dispatch = useDispatch();
+  const postsNew = useSelector((state) => state.POST.postsNew);
 
   const xhtml = postsNew.map((item, index) => {
     return (
@@ -20,13 +19,14 @@ function ArticleLatest() {
   });
 
   useEffect(() => {
-    fetch(
-      "https://wp-api.codethanhthuongthua.asia/wp-json/wp/v2/posts?per_page=3&page=1&lang=vi"
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        dispatch(actPostNew(result))
-      });
+    // API.call()
+    //   .get("wp/v2/posts?per_page=3&page=1&lang=vi")
+    //   .then((res) => {
+    //     dispatch(actPostNew(res.data));
+    //   });
+    // fetchLatestArticles(dispatch);
+
+    dispatch(fetchLatestPosts());
   }, []);
 
   return (
